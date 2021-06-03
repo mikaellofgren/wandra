@@ -1,4 +1,4 @@
-<img src="https://github.com/mikaellofgren/wandra/blob/main/images/wandra-ikon.png" width="50%"></img><br>
+<img src="https://github.com/mikaellofgren/wandra/blob/main/images/wandra-ikon.png" width="40%"></img><br>
 # Wandra
 Simple Wi-Fi analyzer for macOS built in SwiftUI.<br>
 
@@ -13,4 +13,4 @@ macOS 11.0 <br>
 Download from here:<br>
 https://github.com/mikaellofgren/wandra/releases
 
-<img src="https://github.com/mikaellofgren/wandra/blob/main/images/preview.png" width="50%"></img><br>
+<img src="https://github.com/mikaellofgren/wandra/blob/main/images/preview.png" width="30%"></img><br>
