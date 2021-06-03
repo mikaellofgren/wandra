@@ -5,7 +5,7 @@ It displays your Signal to Noise Ratio and Received Signal Strength.
 Basestation SSID and MAC-address, you can export measured data as
 a csv file to import to Numbers/Excel.
 
-System Requirements
+System requirements
 macOS 11.0 
 
 Download from here:
