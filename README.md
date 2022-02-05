@@ -5,7 +5,7 @@ Simple Wi-Fi analyzer for macOS built in SwiftUI.<br>
 
 It displays your Signal to Noise Ratio and Received Signal Strength.<br>
 Basestation SSID and MAC-address, you can export measured data as<br>
-a csv file to import to Numbers/Excel.<br>
+a csv file to import to Numbers/Excel by rightclick the play button.<br>
 
 System requirements<br>
 macOS 11.0 <br>

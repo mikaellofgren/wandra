@@ -15,6 +15,7 @@ var ssidArray = [SSID]()
 var timeInterval: Double = 2
 var baseStationIDFirstTime = true
 var rssiFirstTime = true
+var locationWarningHasBeenShown = 0
 
 struct SSID {
     var ssid: String

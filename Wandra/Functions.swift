@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreWLAN
-
+import CoreLocation
 
 func hideWindowButtons() {
     // Hide window buttons and remove tabbing and fullscreen
@@ -57,7 +57,6 @@ switch snr {
     return (snr, snrText, snrColor)
 }
 
-
 func getStrength () -> (strength: Int, strengthText: String, strengthColor: Color) {
     var strength = CWWiFiClient.shared().interface()?.rssiValue() ?? 0
     strength = abs(strength)
@@ -100,23 +99,30 @@ func normalise(macString: String) -> String {
 }
 
 func getBSSIDName () -> String {
-    // Problems getting bssid always returns Nil, some Apple bug or Location is needed
-    //let bssid = CWWiFiClient.shared().interface()?.bssid() ?? ""
-    var bssid = ""
-    let lines = shell("/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I" ).split(separator:"\n")
-    
-    // Iterate over each line and if matches then add to string
-    for line in lines {
-            if line.contains("BSSID"){
-                bssid = String(line)
-                bssid = bssid.replacingOccurrences(of: "BSSID:", with: "", options: NSString.CompareOptions.literal, range:nil)
-                bssid = bssid.trimmingCharacters(in: .whitespacesAndNewlines)
-                bssid = normalise(macString: bssid)
+    // Signing and Capabilities - App Sandbox Location is needed for BSSID and Outgoing connections client and import CoreLocation
+    CLLocationManager().requestWhenInUseAuthorization()
+    let locationEnableStatus = CLLocationManager.locationServicesEnabled()
+   
+    var bssid = CWWiFiClient.shared().interface()?.bssid() ?? ""
+    bssid = normalise(macString: bssid)
+    if locationWarningHasBeenShown == 0 {
+        if locationEnableStatus == false || bssid.isEmpty && !getSSIDName().isEmpty {
+        print("Location services disabled")
+        
+        let info = NSAlert()
+        info.icon = NSImage(systemSymbolName: "location.slash.fill", accessibilityDescription: nil)
+        info.addButton(withTitle: "OK")
+        info.alertStyle = NSAlert.Style.informational
+        info.messageText = "Please enable location services"
+        info.informativeText = "By pressing OK button locations setting will open. Unlock and then enable locations services and also make sure to allow this app from the list. Otherwise the app cannot retrieve the BSSID."
+        info.runModal()
+        locationWarningHasBeenShown += 1
+        
+        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Location")!)
     }
+    }
+return bssid
 }
-    return bssid
-}
-
 
 func timeNowString () -> String {
 let formatter = DateFormatter()
@@ -129,21 +135,6 @@ let formatter = DateFormatter()
 formatter.dateStyle = .short
     return formatter.string(from: Date())
 }
-
-func shell(_ command: String) -> String {
-       let task = Process()
-       task.launchPath = "/bin/zsh"
-       task.arguments = ["-c", command]
-
-       let pipe = Pipe()
-       task.standardOutput = pipe
-       task.launch()
-
-       let data = pipe.fileHandleForReading.readDataToEndOfFile()
-       let output: String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-
-       return output
-   }
 
 func saveMeasuredData (_ stringToBeSaved: String) {
             // Save Dialog
