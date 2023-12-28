@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		738642B4261A4A580098091E /* HelpTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738642B3261A4A580098091E /* HelpTexts.swift */; };
+		73B576662B0FBA3000460D0F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B576652B0FBA3000460D0F /* Location.swift */; };
 		73EB31B325E5527000A9CAC1 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB31B225E5527000A9CAC1 /* Main.swift */; };
 		73EB31B525E5527000A9CAC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EB31B425E5527000A9CAC1 /* ContentView.swift */; };
 		73EB31B725E5527900A9CAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73EB31B625E5527900A9CAC1 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		738642B3261A4A580098091E /* HelpTexts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTexts.swift; sourceTree = "<group>"; };
+		73B576652B0FBA3000460D0F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		73C2CA442610AFD500259A75 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		73EB31AF25E5527000A9CAC1 /* Wandra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wandra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73EB31B225E5527000A9CAC1 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				738642B3261A4A580098091E /* HelpTexts.swift */,
 				73EB31B425E5527000A9CAC1 /* ContentView.swift */,
 				73EB31C325E6CAF500A9CAC1 /* Functions.swift */,
+				73B576652B0FBA3000460D0F /* Location.swift */,
 				73EB31B625E5527900A9CAC1 /* Assets.xcassets */,
 				73EB31BB25E5527900A9CAC1 /* Info.plist */,
 				73EB31BC25E5527900A9CAC1 /* Wandra.entitlements */,
@@ -116,8 +119,9 @@
 		73EB31A725E5527000A9CAC1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					73EB31AE25E5527000A9CAC1 = {
 						CreatedOnToolsVersion = 12.4;
@@ -163,6 +167,7 @@
 				73EB31B525E5527000A9CAC1 /* ContentView.swift in Sources */,
 				73EB31B325E5527000A9CAC1 /* Main.swift in Sources */,
 				73EB31C425E6CAF500A9CAC1 /* Functions.swift in Sources */,
+				73B576662B0FBA3000460D0F /* Location.swift in Sources */,
 				738642B4261A4A580098091E /* HelpTexts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,9 +209,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -265,9 +272,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -294,6 +303,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Wandra/Preview Content\"";
 				DEVELOPMENT_TEAM = F489D96499;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -304,7 +314,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = se.mikaellofgren.wandra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -320,6 +330,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Wandra/Preview Content\"";
 				DEVELOPMENT_TEAM = F489D96499;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -330,7 +341,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = se.mikaellofgren.wandra;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import CoreLocation
 
 // basestationsArray contains only unique basestations ID, is used to get all custom names from basestationsWithNameArray
 var basestationsArray = Set<String>()
@@ -26,7 +27,11 @@ struct SSID {
     var time: String
 }
 
-struct ContentView: View {
+// 1.2 added CustomUserLocationDelegate and func userLocationUpdated below and LocationController and Vstack .onAppear func
+struct ContentView: View, CustomUserLocationDelegate {
+    func userLocationUpdated(location: CLLocation) {
+             //  print("Location Updated")
+    }
     @Environment(\.colorScheme) var colorScheme
     @State private var ssidName: String = ""
     @State private var snrValue: Float = 0
@@ -64,6 +69,13 @@ var body: some View {
                             self.runApp()
                             }
                         }
+                .onAppear(perform: {
+                    if LocationServices.shared.locationManager.authorizationStatus == .authorizedAlways {
+                        LocationServices.shared.userLocationDelegate = self
+                    } else {
+                        LocationServices.shared.locationManager.requestAlwaysAuthorization()
+                    }
+                })
                 Divider().frame(width: 200).padding(.bottom, 5)
                 Button(action: {
                     self.buttonStartStop()
@@ -397,7 +409,7 @@ struct BasestationTextFieldView: View {
     
     func runApp() {
         hideWindowButtons()
-
+        
         if getSSIDName() == "" {
             self.buttonStartStop()
             // Show alert
@@ -405,8 +417,8 @@ struct BasestationTextFieldView: View {
                 info.icon = NSImage (named: NSImage.cautionName)
                 info.addButton(withTitle: "OK")
                 info.alertStyle = NSAlert.Style.informational
-                info.messageText = "Wi-Fi seems disabled"
-                info.informativeText = "Enable Wi-Fi, then press play button to try again"
+                info.messageText = "Wi-Fi or Location seems disabled"
+                info.informativeText = "Enable Wi-Fi and also check System Settings - Privacy & Security - Location Services and enable for Wandra, then press play button to try again."
                 info.runModal()
             
             return

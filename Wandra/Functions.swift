@@ -99,29 +99,9 @@ func normalise(macString: String) -> String {
 }
 
 func getBSSIDName () -> String {
-    // Signing and Capabilities - App Sandbox Location is needed for BSSID and Outgoing connections client and import CoreLocation
-    CLLocationManager().requestWhenInUseAuthorization()
-    let locationEnableStatus = CLLocationManager.locationServicesEnabled()
-   
     var bssid = CWWiFiClient.shared().interface()?.bssid() ?? ""
     bssid = normalise(macString: bssid)
-    if locationWarningHasBeenShown == 0 {
-        if locationEnableStatus == false || bssid.isEmpty && !getSSIDName().isEmpty {
-        print("Location services disabled")
-        
-        let info = NSAlert()
-        info.icon = NSImage(systemSymbolName: "location.slash.fill", accessibilityDescription: nil)
-        info.addButton(withTitle: "OK")
-        info.alertStyle = NSAlert.Style.informational
-        info.messageText = "Please enable location services"
-        info.informativeText = "By pressing OK button locations setting will open. Unlock and then enable locations services and also make sure to allow this app from the list. Otherwise the app cannot retrieve the BSSID."
-        info.runModal()
-        locationWarningHasBeenShown += 1
-        
-        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Location")!)
-    }
-    }
-return bssid
+        return bssid
 }
 
 func timeNowString () -> String {
